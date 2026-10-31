@@ -17,7 +17,7 @@ export const CompactStoreWelcome: React.FC<CompactStoreWelcomeProps> = ({
           <div className="relative shrink-0">
             <div className="w-18 h-18 sm:w-20 sm:h-20 rounded-full overflow-hidden border-2 border-[#899588] p-0.5 bg-[#F8F6F1] shadow-xs">
               <img
-                src="/assets/aistudio/Margaret_Williams_Memorial_Photo_35c13dec.png"
+                src="./assets/aistudio/Margaret_Williams_Memorial_Photo_35c13dec.png"
                 alt="Margaret Williams"
                 className="w-full h-full object-cover rounded-full object-[center_20%]"
               />

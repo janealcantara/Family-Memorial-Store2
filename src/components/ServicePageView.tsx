@@ -34,7 +34,7 @@ export const ServicePageView: React.FC<ServicePageViewProps> = ({
             <div className="md:col-span-5">
               <div className="arch-frame overflow-hidden aspect-[4/5] border border-[#E6E1D7] bg-[#F5F3EE] shadow-sm">
                 <img
-                  src="/assets/aistudio/Margaret_Williams_In_her_Garden_e5c434b0.png"
+                  src="./assets/aistudio/Margaret_Williams_In_her_Garden_e5c434b0.png"
                   alt="Margaret Williams in her rose garden (1942–2026)"
                   className="w-full h-full object-cover object-[center_20%] contrast-[102%]"
                 />

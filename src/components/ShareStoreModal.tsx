@@ -151,7 +151,7 @@ export const ShareStoreModal: React.FC<ShareStoreModalProps> = ({ isOpen, onClos
           <div className="flex items-center gap-3.5 p-3 rounded-[6px] bg-[#F8F6F1] border border-[#E6E1D7]">
             <div className="w-12 h-12 rounded-full overflow-hidden border border-[#899588] shrink-0 bg-white">
               <img
-                src="/assets/aistudio/Margaret_Williams_Memorial_Photo_35c13dec.png"
+                src="./assets/aistudio/Margaret_Williams_Memorial_Photo_35c13dec.png"
                 alt="Margaret Williams"
                 className="w-full h-full object-cover object-[center_20%]"
               />

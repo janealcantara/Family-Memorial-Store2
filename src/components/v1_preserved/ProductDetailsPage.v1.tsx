@@ -41,19 +41,19 @@ const MARGARET_PORTRAITS = [
   {
     id: 'memorial',
     title: 'Memorial Portrait',
-    url: '/assets/aistudio/Margaret_Williams_Memorial_Photo_35c13dec.png',
+    url: './assets/aistudio/Margaret_Williams_Memorial_Photo_35c13dec.png',
     tag: 'Formal Memorial',
   },
   {
     id: 'garden',
     title: 'In Her Garden',
-    url: '/assets/aistudio/Margaret_Williams_In_her_Garden_e5c434b0.png',
+    url: './assets/aistudio/Margaret_Williams_In_her_Garden_e5c434b0.png',
     tag: 'Rose Garden',
   },
   {
     id: 'jubilee',
     title: '80th Jubilee Celebration',
-    url: '/assets/aistudio/Margaret_Williams_80th_Jubilee_5cb628a2.png',
+    url: './assets/aistudio/Margaret_Williams_80th_Jubilee_5cb628a2.png',
     tag: 'Milestone Jubilee',
   },
 ];

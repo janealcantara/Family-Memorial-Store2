@@ -13,19 +13,19 @@ const GRANDMOTHER_PORTRAITS = [
     id: 'formal',
     title: 'Memorial Portrait',
     caption: 'Official Remembrance Portrait · In Her Rose Garden',
-    url: '/assets/aistudio/Margaret_Williams_Memorial_Photo_35c13dec.png',
+    url: './assets/aistudio/Margaret_Williams_Memorial_Photo_35c13dec.png',
   },
   {
     id: 'garden',
     title: 'In Her Garden',
     caption: 'West Grove Botanical Sanctuary · Tending the Roses (2024)',
-    url: '/assets/aistudio/Margaret_Williams_In_her_Garden_e5c434b0.png',
+    url: './assets/aistudio/Margaret_Williams_In_her_Garden_e5c434b0.png',
   },
   {
     id: 'family',
     title: '80th Jubilee',
     caption: 'Margaret’s 80th Birthday Celebration & Family Jubilee (2022)',
-    url: '/assets/aistudio/Margaret_Williams_80th_Jubilee_5cb628a2.png',
+    url: './assets/aistudio/Margaret_Williams_80th_Jubilee_5cb628a2.png',
   },
 ];
 
