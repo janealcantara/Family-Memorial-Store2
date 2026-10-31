@@ -1,0 +1,201 @@
+import React, { useState } from 'react';
+import { Header } from './components/Header';
+import { CompactStoreWelcome } from './components/v2/CompactStoreWelcome';
+import { V2RelationshipSection } from './components/v2/V2RelationshipSection';
+import { V2GardenSection } from './components/v2/V2GardenSection';
+import { V2KeepsakesSection } from './components/v2/V2KeepsakesSection';
+import { V2StoreReassurance } from './components/v2/V2StoreReassurance';
+import { ProductDetailsPage } from './components/ProductDetailsPage';
+import { RemembranceSanctuary } from './components/RemembranceSanctuary';
+import { ServicePageView } from './components/ServicePageView';
+import { CartDrawer } from './components/CartDrawer';
+import { ShareStoreModal } from './components/ShareStoreModal';
+import { Footer } from './components/Footer';
+import { TributeProduct, TributePersonalization, CartItem } from './types';
+
+export default function App() {
+  const [activeTab, setActiveTab] = useState<'home' | 'service' | 'sanctuary'>('home');
+  const [selectedProduct, setSelectedProduct] = useState<TributeProduct | null>(null);
+  const [cartItems, setCartItems] = useState<CartItem[]>([]);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+  const [isShareModalOpen, setIsShareModalOpen] = useState(false);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
+
+  const showToast = (msg: string) => {
+    setToastMessage(msg);
+    setTimeout(() => {
+      setToastMessage(null);
+    }, 3500);
+  };
+
+  const handleAddToCart = (
+    product: TributeProduct,
+    personalization: TributePersonalization,
+    quantity = 1
+  ) => {
+    const newCartItem: CartItem = {
+      cartItemId: `item-${Date.now()}-${Math.random().toString(36).substring(2, 7)}`,
+      product,
+      quantity,
+      personalization,
+    };
+
+    setCartItems((prev) => [newCartItem, ...prev]);
+    showToast(
+      `Added ${quantity > 1 ? `${quantity}x ` : ''}“${product.title}” to your Memorial Basket`
+    );
+  };
+
+  const handleUpdateQuantity = (cartItemId: string, newQty: number) => {
+    if (newQty <= 0) {
+      handleRemoveItem(cartItemId);
+      return;
+    }
+    setCartItems((prev) =>
+      prev.map((item) => (item.cartItemId === cartItemId ? { ...item, quantity: newQty } : item))
+    );
+  };
+
+  const handleRemoveItem = (cartItemId: string) => {
+    setCartItems((prev) => prev.filter((item) => item.cartItemId !== cartItemId));
+  };
+
+  const handleClearCart = () => {
+    setCartItems([]);
+  };
+
+  const handleTabChange = (tab: 'home' | 'service' | 'sanctuary') => {
+    setSelectedProduct(null);
+    setActiveTab(tab);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+  };
+
+  const handleScrollToV2Section = (sectionId: string) => {
+    if (selectedProduct) {
+      setSelectedProduct(null);
+    }
+    if (activeTab !== 'home') {
+      setActiveTab('home');
+    }
+    setTimeout(() => {
+      const el = document.getElementById(sectionId);
+      if (el) {
+        el.scrollIntoView({ behavior: 'smooth', block: 'start' });
+      }
+    }, 60);
+  };
+
+  const totalCartCount = cartItems.reduce((acc, item) => acc + item.quantity, 0);
+
+  return (
+    <div className="min-h-screen flex flex-col bg-[#F8F6F1] text-[#1B1C19] selection:bg-[#D7E3D4] selection:text-[#1F2320]">
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="fixed bottom-6 right-6 z-50 bg-[#343835] text-[#F8F6F1] px-5 py-3 rounded-[4px] shadow-xl border border-[#899588] text-xs font-medium flex items-center gap-2 animate-bounce">
+          <span className="w-2 h-2 rounded-full bg-[#899588]" />
+          <span>{toastMessage}</span>
+        </div>
+      )}
+
+      {/* Header */}
+      <Header
+        activeTab={activeTab}
+        setActiveTab={handleTabChange}
+        cartCount={totalCartCount}
+        onOpenCart={() => setIsCartOpen(true)}
+        onScrollToV2Section={handleScrollToV2Section}
+      />
+
+      {/* Main Content Area */}
+      <main className="flex-1">
+        {selectedProduct ? (
+          <ProductDetailsPage
+            product={selectedProduct}
+            onBack={() => {
+              setSelectedProduct(null);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onSelectProduct={(p) => {
+              setSelectedProduct(p);
+              window.scrollTo({ top: 0, behavior: 'smooth' });
+            }}
+            onAddToCart={handleAddToCart}
+            onOpenCart={() => setIsCartOpen(true)}
+          />
+        ) : (
+          <>
+            {activeTab === 'home' && (
+              <>
+                {/* Compact Welcome Section with Small Portrait */}
+                <CompactStoreWelcome
+                  onScrollToSection={handleScrollToV2Section}
+                  onOpenShareModal={() => setIsShareModalOpen(true)}
+                />
+
+                {/* Section 1: Shop by Family Relationship */}
+                <V2RelationshipSection
+                  onSelectProduct={(product) => {
+                    setSelectedProduct(product);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+
+                {/* Section 2: Inspired by Margaret's Interests (Gardening, Roses, Nature) */}
+                <V2GardenSection
+                  onSelectProduct={(product) => {
+                    setSelectedProduct(product);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+
+                {/* Section 3: Personalized Keepsakes (Urns, Jewelry, Photo Gifts, Engraved Items) */}
+                <V2KeepsakesSection
+                  onSelectProduct={(product) => {
+                    setSelectedProduct(product);
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+                  }}
+                />
+
+                {/* Streamlined Reassurance Bar */}
+                <V2StoreReassurance />
+              </>
+            )}
+
+            {activeTab === 'service' && (
+              <ServicePageView
+                onOrderFlowers={() => {
+                  window.location.href = 'tel:5558492100';
+                }}
+                onOpenSanctuary={() => handleTabChange('sanctuary')}
+              />
+            )}
+
+            {activeTab === 'sanctuary' && <RemembranceSanctuary />}
+          </>
+        )}
+      </main>
+
+      {/* Section 7: Footer */}
+      <Footer
+        onOpenServiceInfo={() => handleTabChange('service')}
+        onNavigateTab={handleTabChange}
+      />
+
+      {/* Memorial Basket & Checkout Drawer */}
+      <CartDrawer
+        isOpen={isCartOpen}
+        onClose={() => setIsCartOpen(false)}
+        items={cartItems}
+        onUpdateQuantity={handleUpdateQuantity}
+        onRemoveItem={handleRemoveItem}
+        onClearCart={handleClearCart}
+      />
+
+      {/* Family Memorial Share Modal */}
+      <ShareStoreModal
+        isOpen={isShareModalOpen}
+        onClose={() => setIsShareModalOpen(false)}
+      />
+    </div>
+  );
+}

@@ -1,0 +1,7 @@
+{
+  "name": "Serene Remembrance",
+  "description": "An artisanal memorial boutique and tribute catalog honoring Margaret Williams (1942–2026), in partnership with Willow & Pine Funeral Home.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
+
